@@ -10,13 +10,14 @@ load_dotenv(BASE_DIR / '.env')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['social-app-002e.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+
 
 
 
