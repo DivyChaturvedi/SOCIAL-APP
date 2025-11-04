@@ -78,13 +78,24 @@ WSGI_APPLICATION = 'socialapp.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 import dj_database_url
+import os
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://socialapp_db_56ui_user:qjG7Vyi57FAQrLp8JoGwBxEpCHhrLH6I@dpg-d44s83ripnbc73ar55ag-a/socialapp_db_56ui',
-        conn_max_age=600,
-    )
-}
+if os.environ.get('RENDER'):  # jab Render server pe chalega
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
+else:  # jab local machine pe chalega
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
 
 
 # Password validation
