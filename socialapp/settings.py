@@ -24,11 +24,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key')
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 # Allowed hosts (important for Render)
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '.onrender.com',  # ✅ allows all Render subdomains
-]
+ALLOWED_HOSTS = ['social-app-002e.onrender.com', 'localhost', '127.0.0.1']
 
 
 
