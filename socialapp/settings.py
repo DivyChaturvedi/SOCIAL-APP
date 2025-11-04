@@ -17,15 +17,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load environment variables from .env file
 load_dotenv(BASE_DIR / '.env')
 
-# Secret key
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key')
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-# Debug mode
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
-
-# Allowed hosts (important for Render)
 ALLOWED_HOSTS = ['social-app-002e.onrender.com', 'localhost', '127.0.0.1']
 
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
