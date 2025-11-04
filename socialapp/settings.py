@@ -10,7 +10,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 from dotenv import load_dotenv
 
-# load .env file from BASE_DIR
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
