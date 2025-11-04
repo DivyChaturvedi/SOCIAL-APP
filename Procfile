@@ -1,1 +1,1 @@
-web: gunicorn socialapp.wsgi
+web: gunicorn socialapp.wsgi:application
