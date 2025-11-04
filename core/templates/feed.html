@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Home Feed{% endblock %}
+
+{% block content %}
+<h3 class="mb-4">Your Feed</h3>
+
+{% for post in posts %}
+<div class="card shadow-sm mb-4">
+    <div class="card-header d-flex justify-content-between">
+        <a href="{% url 'profile' post.author.username %}">
+            <strong>@{{ post.author.username }}</strong>
+        </a>
+        <small class="text-muted">{{ post.created_at|date:"M d, Y H:i" }}</small>
+    </div>
+    <div class="card-body">
+        <p class="fs-5">{{ post.content }}</p>
+
+        <!-- Like Button -->
+        <form method="post" action="{% url 'like_post' post.id %}">
+            {% csrf_token %}
+            {% if user in post.likes.all %}
+                <button class="btn btn-sm btn-danger">Unlike</button>
+            {% else %}
+                <button class="btn btn-sm btn-outline-primary">Like</button>
+            {% endif %}
+            <span class="ms-2 text-muted">{{ post.likes.count }} Likes</span>
+        </form>
+
+        <!-- View Comments / Details -->
+        <a href="{% url 'post_detail' post.id %}" class="btn btn-link btn-sm mt-2">View Comments</a>
+    </div>
+</div>
+{% empty %}
+    <p class="text-muted">No posts to show.</p>
+{% endfor %}
+{% endblock %}

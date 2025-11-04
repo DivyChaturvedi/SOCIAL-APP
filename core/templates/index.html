@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Home - SocialApp{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Welcome {{ user.username }}!</h2>
+
+{% for post in posts %}
+<div class="card mb-3">
+    <div class="card-header d-flex justify-content-between">
+        {% if post.author and post.author.username %}
+            <a href="{% url 'profile' post.author.username %}">
+                <strong>@{{ post.author.username }}</strong>
+            </a>
+        {% else %}
+            <strong>@Unknown</strong>
+        {% endif %}
+        <span class="text-muted small">{{ post.created_at|date:"M d, Y H:i" }}</span>
+    </div>
+    <div class="card-body">
+        {% if post.image %}
+            <img src="{{ post.image.url }}" class="img-fluid rounded mb-2" alt="Post Image">
+        {% endif %}
+        <p>{{ post.content }}</p>
+        <form method="post" action="{% url 'like_post' post.id %}">
+            {% csrf_token %}
+            {% if user in post.likes.all %}
+                <button type="submit" class="btn btn-sm btn-danger">Unlike</button>
+            {% else %}
+                <button type="submit" class="btn btn-sm btn-outline-primary">Like</button>
+            {% endif %}
+            <span class="ms-2">{{ post.likes.count }} Likes</span>
+        </form>
+    </div>
+</div>
+{% empty %}
+<p>No posts yet.</p>
+{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Profile - {{ profile_user.username }}{% endblock %}
+
+{% block content %}
+<h2>@{{ profile_user.username }}</h2>
+
+{% if user != profile_user %}
+    <form method="post" action="{% url 'follow_toggle' profile_user.username %}">
+        {% csrf_token %}
+        {% if is_following %}
+            <button class="btn btn-danger btn-sm">Unfollow</button>
+        {% else %}
+            <button class="btn btn-success btn-sm">Follow</button>
+        {% endif %}
+    </form>
+{% endif %}
+
+<hr>
+
+<h4 class="mt-4">Posts</h4>
+
+{% for post in posts %}
+<div class="card mb-3">
+    <div class="card-body">
+        <p>{{ post.content }}</p>
+        <p class="text-muted small">{{ post.created_at|date:"M d, Y H:i" }}</p>
+    </div>
+</div>
+{% empty %}
+<p>No posts yet.</p>
+{% endfor %}
+
+{% endblock %}

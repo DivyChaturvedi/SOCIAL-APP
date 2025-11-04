@@ -1,0 +1,13 @@
+db.sqlite3
+# Ignore environment and cache
+venv/
+__pycache__/
+*.pyc
+db.sqlite3
+.env
+
+# Ignore media files (uploads)
+media/
+
+# Ignore static if it's large and can be collected later
+/staticfiles/
