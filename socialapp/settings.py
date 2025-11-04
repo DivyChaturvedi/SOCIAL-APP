@@ -8,21 +8,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
-from pathlib import Path
-
+# Base directory of your project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(os.path.join(BASE_DIR, '.env'))
+# Load environment variables from .env file
+load_dotenv(BASE_DIR / '.env')
 
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+# Secret key
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key')
+
+# Debug mode
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+
+# Allowed hosts (important for Render)
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['social-app-002e.onrender.com', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
