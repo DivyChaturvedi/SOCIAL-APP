@@ -81,7 +81,7 @@ import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://socialapp_user:password@dpg-xyz1234.render.com/socialapp_db',
+        default='postgresql://socialapp_db_56ui_user:qjG7Vyi57FAQrLp8JoGwBxEpCHhrLH6I@dpg-d44s83ripnbc73ar55ag-a/socialapp_db_56ui',
         conn_max_age=600,
     )
 }
